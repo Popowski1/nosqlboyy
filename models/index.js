@@ -1,4 +1,6 @@
-const User = require ('User.js');
-const Thought = require ('Thoughts.js');
+const User = require ('./user');
+const Thought = require ('./thoughts');
 
-module.exports = router;
+module.exports = {
+    User,Thought
+};
