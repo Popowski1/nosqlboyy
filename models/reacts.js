@@ -1,26 +1,26 @@
 const {
     Schema,
-    model } = require('mongoose');
+    Types } = require('mongoose');
 
-const userSchema = new Schema ({
-    username: {
-        type: String,
-        unique: true,
-        required:true,
-        trim:true
+const reactSchema = new Schema ({
+    reactId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+        
     },
-    email: {
+    reactThis: {
         type: String,
-        unique: true,
+        Maxlength: 200,
         required:true,
     },
-    thoughts: [{
-        type:Schema.Types.ObjectId,
-        ref:'Thought'
+    username: [{
+        type: String,
+        required: true
     }],
-    friends: [{
-        type:Schema.Types.ObjectId,
-        ref:'User'
+    createdAt: [{
+        type: Date,
+        default: Date.now,
+        get: Date.now
     }]
 }, {
 
@@ -30,8 +30,6 @@ toJSON: {
 },
 id:false
 });
-userSchema.virtual('friendLength').get(function () {
-    return this.friends.length;
-})
-const User = model('User', userSchema);
-module.exports = User;
+
+
+module.exports = reactSchema;
