@@ -22,7 +22,7 @@ const userCon = {
 
 UserId({
     params }, res) {
-        user.findOne({
+        User.findOne({
             _id: params._id
         })
         .populate({
