@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const allThoughts = require('../../controllers/thoughtcon.js');
-const idThought = require('../../controllers/thoughtcon.js');
-const addThought = require('../../controllers/thoughtcon.js');
-const removeThought = require('../../controllers/thoughtcon.js');
-const updateThought = require('../../controllers/thoughtcon.js');
-const addReact = require('../../controllers/thoughtcon.js');
-const removeReact = require('../../controllers/thoughtcon.js');
+const {
+    allThoughts ,
+ idThought ,
+ addThought ,
+ removeThought ,
+ updateThought ,
+ addReact ,
+ removeReact } = require('../../controllers/thoughtcon');
 
 router
 .route('/')

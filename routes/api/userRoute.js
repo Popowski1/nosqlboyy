@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const allUsers = require('../../controllers/usercon.js');
-const idUser = require('../../controllers/usercon.js');
-const addUser = require('../../controllers/usercon.js');
-const removeUser = require('../../controllers/usercon.js');
-const updateUser = require('../../controllers/usercon.js');
-const addFriend = require('../../controllers/usercon.js');
-const removeFriend = require('../../controllers/usercon.js');
+const { allUsers ,
+ UserId ,
+ addUser ,
+ removeUser ,
+ updateUser ,
+ addFriend ,
+ removeFriend } = require('../../controllers/usercon');
 
 router
 .route('/')
@@ -14,7 +14,7 @@ router
 
 router
 .route('/:Id')
-.get(idUser)
+.get(UserId)
 .put(updateUser)
 .delete(removeUser);
 
@@ -23,6 +23,6 @@ router
 .post(addFriend);
 
 router
-.route('/:UserId/friends/:friendID')
+.route('/:UserId/friends/:friendId')
 .delete(removeFriend);
 module.exports = router;

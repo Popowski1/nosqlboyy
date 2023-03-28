@@ -5,10 +5,13 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(express.urlencoded('public'));
+app.use(express.static('public'));
 app.use(require('./routes'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:3001' );
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/thoughtsapp', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+}).then(() => {
+    app.listen(PORT, () => console.log(`Connect localhost:${PORT}`));
+});
 mongoose.set('debug',true);
-
-app.listen(PORT, () => console.log('Connect localhost:${PORT}'));
