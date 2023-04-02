@@ -20,10 +20,9 @@ const userCon = {
     },
 
 
-    UserId({
-        params }, res) {
+    UserId({ params }, res) {
         User.findOne({
-            _id: params._id
+            _id: params.userId
         })
             .populate({
                 path: 'thoughts'
@@ -47,7 +46,7 @@ const userCon = {
 
     updateUser({ params, body }, res) {
         User.findOneAndUpdate({
-            _id: params._id
+            _id: params.userId
         }, body, {
             new: true
         })
@@ -66,7 +65,7 @@ const userCon = {
 
     removeUser({ params }, res) {
         User.findOneAndDelete({
-            _id: params.id
+            _id: params.userId
         })
             .then(dbUserData => {
                 if (!dbUserData) {
@@ -77,40 +76,41 @@ const userCon = {
                 }
                 return dbUserData;
             })
-            .then(dbUserData => {
-                User.updateMany({
-                    _id: {
-                        $in: dbUserData.friends
-                    }
-                }, {
-                    $pull: {
-                        friends: params.userId
-                    }
-                })
-                    .then(() => {
-                        Thought.deleteMany({
-                            username: dbUserData.username
-                        })
-                            .then(() => {
-                                res.json({
-                                    message: 'User deleted successfully'
-                                });
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                res.status(400).json(err);
-                            })
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        res.status(400).json(err);
-                    })
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(400).json(err);
-            })
     },
+    //         .then(dbUserData => {
+    //             User.updateMany({
+    //                 _id: {
+    //                     $in: dbUserData.friends
+    //                 }
+    //             }, {
+    //                 $pull: {
+    //                     friends: params.userId
+    //                 }
+    //             })
+    //                 .then(() => {
+    //                     Thought.deleteMany({
+    //                         username: dbUserData.username
+    //                     })
+    //                         .then(() => {
+    //                             res.json({
+    //                                 message: 'User deleted successfully'
+    //                             });
+    //                         })
+    //                         .catch(err => {
+    //                             console.log(err);
+    //                             res.status(400).json(err);
+    //                         })
+    //                 })
+    //                 .catch(err => {
+    //                     console.log(err);
+    //                     res.status(400).json(err);
+    //                 })
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             res.status(400).json(err);
+    //         })
+    // },
 
     addFriend({ params }, res) {
         User.findOneAndUpdate({

@@ -41,7 +41,7 @@ const thoughtCon = {
             .then((ThoughtData) => {
                 return User.findOneAndUpdate(
                     { _id: body.userId },
-                    { $addToSet: { thoughts: ThoughtData._id } },
+                    { $addToSet: { thoughts: ThoughtData.thoughtId } },
                     { new: true }
 
 
@@ -96,7 +96,7 @@ const thoughtCon = {
     },
 
     addReact({ params, body }, res) {
-        Thought.findOneAndUpdate({ _id: params.thought.id },
+        Thought.findOneAndUpdate({ _id: params.thoughtId },
             { $push: { reactions: body } },
             { new: true })
         .then(updatedThought => {

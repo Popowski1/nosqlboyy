@@ -13,7 +13,7 @@ router
 .post(addUser);
 
 router
-.route('/:Id')
+.route('/:userId')
 .get(UserId)
 .put(updateUser)
 .delete(removeUser);
